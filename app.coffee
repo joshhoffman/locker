@@ -55,6 +55,12 @@ beerRoute.put (req, res) ->
 
             res.json beer
 
+beerRoute.delete (req, res) ->
+    Beer.findByIdAndRemove req.params.beer_id, (err) ->
+        res.send err if err
+
+        res.json { message: 'Removed from locker' }
+
 app.use '/api', router
 
 app.listen port
