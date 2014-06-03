@@ -30,6 +30,12 @@ beersRoute.post (req, res) ->
 
         res.json { message: "Beer added to locker", data: beer }
 
+beersRoute.get (req, res) ->
+    Beer.find (err, beers) ->
+        res.send err if err
+
+        res.json beers
+
 app.use '/api', router
 
 app.listen port
