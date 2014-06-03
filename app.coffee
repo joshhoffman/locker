@@ -2,6 +2,7 @@ express = require 'express'
 mongoose = require 'mongoose'
 bodyparser = require 'body-parser'
 Beer = require './models/beer'
+beerController = require './controllers/beer'
 
 mongoose.connect 'mongodb://localhost:27017/beerlocker'
 
@@ -18,23 +19,9 @@ router.get '/', (req, res) ->
 
 beersRoute = router.route '/beers'
 
-beersRoute.post (req, res) ->
-    beer = new Beer()
+beersRoute.post beerController.postBeers
 
-    beer.name = req.body.name
-    beer.type = req.body.type
-    beer.quantity = req.body.quantity
-
-    beer.save (err) ->
-        res.send err if err
-
-        res.json { message: "Beer added to locker", data: beer }
-
-beersRoute.get (req, res) ->
-    Beer.find (err, beers) ->
-        res.send err if err
-
-        res.json beers
+beersRoute.get beerController.getBeer
 
 beerRoute = router.route '/beers/:beer_id'
 
