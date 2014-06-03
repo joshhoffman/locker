@@ -1,9 +1,9 @@
 mongoose = require 'mongoose'
 
 BeerSchema = new mongoose.Schema {
-    name: string,
-    type: string,
-    quantity: number
+    name: String,
+    type: String,
+    quantity: Number
 }
 
 module.exports = mongoose.model 'Beer', BeerSchema
