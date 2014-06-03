@@ -44,6 +44,17 @@ beerRoute.get (req, res) ->
 
         res.json beer
 
+beerRoute.put (req, res) ->
+    Beer.findById req.params.beer_id, (err, beer) ->
+        res.send err if err
+
+        beer.quantity = req.body.quantity
+
+        beer.save (err) ->
+            res.send err if err
+
+            res.json beer
+
 app.use '/api', router
 
 app.listen port
