@@ -3,7 +3,7 @@ mongoose = require 'mongoose'
 bodyparser = require 'body-parser'
 Beer = require './models/beer'
 
-mongoose.connect('mongodb://localhost:27017/beerlocker');
+mongoose.connect 'mongodb://localhost:27017/beerlocker'
 
 app = express()
 
