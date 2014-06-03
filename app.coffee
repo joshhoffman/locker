@@ -36,6 +36,14 @@ beersRoute.get (req, res) ->
 
         res.json beers
 
+beerRoute = router.route '/beers/:beer_id'
+
+beerRoute.get (req, res) ->
+    Beer.findById req.params.beer_id, (err, beer) ->
+        res.send err if err
+
+        res.json beer
+
 app.use '/api', router
 
 app.listen port
